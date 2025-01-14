@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alumno - Gestión de Protocolos</title>
+    <link rel="stylesheet" href="../Static/styles/estilos_perfiles.css">
+</head>
+<body>
+    <header>
+        <span>ESCUELA SUPERIOR DE CÓMPUTO</span>
+        <a id="logout" href="/logout">Cerrar sesión</a>
+        <span>INSTITUTO POLITÉCNICO NACIONAL</span>
+    </header>
+
+    <div class="container">
+        <!-- Caja principal -->
+        <div class="box">
+            <div class="logos-title">
+                <div class="logo-left-wrapper">
+                    <img src="../Static/images/ESCOM.png" alt="Logo ESCOM" class="logo-left">
+                </div>
+                <h1>Perfil de Alumno</h1>
+                <img src="../Static/images/IPN.png" alt="Logo IPN" class="logo-right">
+            </div>
+    
+            <div class="content-section">
+                <div class="info-box" id="info-box">
+                    <!-- Secciones de contenido -->
+                    <section id="registrar-protocolo" class="section hidden">
+                        <h2>Registrar Protocolo</h2>
+                        <form id="registro-protocolo-form" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <label for="file" class="form-label">Subir archivo PDF:</label>
+                                <input type="file" id="file" name="file" accept=".pdf" class="form-input" required>
+                            </div>
+                            <div class="form-button">
+                                <button type="submit" class="btn-submit">Subir Protocolo</button>
+                            </div>
+                        </form>
+                        <div id="protocolo-mensaje" class="hidden"></div>
+                    </section>                    
+    
+                    <section id="notificaciones" class="section hidden">
+                        <h2>Notificaciones</h2>
+                    </section>
+    
+                    <section id="estado-protocolo" class="section hidden">
+                        <h2>Consultar Estado del Protocolo</h2>
+                    </section>
+    
+                    <section id="subir-correcciones" class="section hidden">
+                        <h2>Hacer Modificaciones</h2>
+                    </section>
+                </div>
+            </div>
+        </div>
+    
+        <!-- Menú lateral afuera de la caja principal -->
+        <aside class="menu">
+            <ul>
+                <li><button onclick="showSection('registrar-protocolo')">Registrar Protocolo</button></li>
+                <li><button onclick="showSection('notificaciones')">Notificaciones</button></li>
+                <li><button onclick="showSection('estado-protocolo')">Consultar Estado de Solicitud</button></li>
+                <li><button onclick="showSection('subir-correcciones')">Hacer Modificaciones</button></li>
+            </ul>
+            <p class="menu-welcome-text">Bienvenido, {{nombre}}</p>
+        </aside>     
+    </div>    
+
+    <footer>
+        <span>Análisis y Diseño de Sistemas</span>
+    </footer>
+
+    <script src="../Static/scripts/script_p_alumno.js"></script>
+</body>
+</html>

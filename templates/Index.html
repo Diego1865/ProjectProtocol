@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Información para Protocolo</title>
+    <link rel="stylesheet" href="../Static/styles/estilo_index.css">
+</head>
+<body>
+    <header>
+        <span>ESCUELA SUPERIOR DE CÓMPUTO</span>
+        <span>INSTITUTO POLITÉCNICO NACIONAL</span>
+    </header>
+
+    <div class="container">
+        <div class="box">
+            <div class="logos-title">
+                <img src="../Static/images/ESCOM.png" alt="Logo ESCOM" class="logo-left">
+                <h1>Sistema de Información de Protocolo</h1>
+                <img src="../Static/images/IPN.png" alt="Logo IPN" class="logo-right">
+            </div>
+
+            <div class="content-section">
+                <div class="info-box">
+                    <p>
+                        Este es un sistema de información para el proceso de solicitud de protocolo de trabajo terminal.<br>
+                        Facilitamos la organización y gestión para este tipo de trámites académicos.
+                    </p>
+                </div>
+
+                <div class="login-box">
+                    <h3>Iniciar Sesión</h3>
+                    <form action="/login" method="POST">
+                        <label for="usuario">Matrícula:</label>
+                        <input type="text" id="usuario" name="usuario" placeholder="Ingrese su matrícula">
+                        <label for="password">Contraseña:</label>
+                        <input type="password" id="password" name="password" placeholder="Ingrese su contraseña">
+                        <button type="submit">Entrar</button>
+                        {% if mensaje %}
+                            <p>{{ mensaje }}</p>
+                        {% endif %}
+                        <div class="extras">
+                            <a href="Cambiar_password.html">¿Olvidaste tu contraseña?</a>
+                            <a href="/nuevo_alumno">Registrar Alumno</a>
+                        </div>
+                    </form>                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <span></span>
+    </footer>
+</body>
+</html>

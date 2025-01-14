@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crear Nuevo Usuario</title>
+    <link rel="stylesheet" href="../Static/styles/estilo_n_alumno.css">
+</head>
+<body>
+    <header>
+        <span>ESCUELA SUPERIOR DE CÓMPUTO</span>
+        <span>INSTITUTO POLITÉCNICO NACIONAL</span>
+    </header>
+
+    <div class="container">
+        <div class="box">
+            <div class="logos-title">
+                <img src="../Static/images/ESCOM.png" alt="Logo ESCOM">
+                <h1>Registrar Alumno</h1>
+                <img src="../Static/images/IPN.png" alt="Logo IPN">
+            </div>
+            <form id="userForm" action="/nuevo_alumno" method="POST">
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="nombre">Nombre:</label>
+                        <input type="text" id="nombre" placeholder="Ingrese su nombre" maxlength="25" name="nombre" oninput="validateField(this, 'nombreError', validateName, 'Debe contener solo letras y un máximo de 25 caracteres.')">
+                        <div class="error" id="nombreError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellidoPaterno">Apellido Paterno:</label>
+                        <input type="text" id="apellidoPaterno" placeholder="Ingrese su apellido paterno" name="apellidoPaterno" maxlength="25" oninput="validateField(this, 'apellidoPaternoError', validateName, 'Debe contener solo letras y un máximo de 25 caracteres.')">
+                        <div class="error" id="apellidoPaternoError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="apellidoMaterno">Apellido Materno:</label>
+                        <input type="text" id="apellidoMaterno" placeholder="Ingrese su apellido materno" name="apellidoMaterno" maxlength="25" oninput="validateField(this, 'apellidoMaternoError', validateName, 'Debe contener solo letras y un máximo de 25 caracteres.')">
+                        <div class="error" id="apellidoMaternoError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="matricula">Matrícula:</label>
+                        <input type="text" id="matricula" placeholder="Ingrese su matrícula" name="matricula" maxlength="10" oninput="validateField(this, 'matriculaError', validateMatricula, 'Debe contener solo números y un máximo de 10 caracteres.')">
+                        <div class="error" id="matriculaError"></div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="correo">Correo Institucional:</label>
+                        <input type="email" id="correo" placeholder="Ingrese su correo institucional" name="correo" oninput="validateField(this, 'correoError', validateEmail, 'Debe ser un correo válido del tipo @alumno.ipn.mx.')">
+                        <div class="error" id="correoError"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="telefono">Número de Teléfono:</label>
+                        <input type="text" id="telefono" placeholder="Ingrese su número de teléfono" name="telefono" maxlength="10" oninput="validateField(this, 'telefonoError', validatePhone, 'Debe contener solo números y un máximo de 10 caracteres.')">
+                        <div class="error" id="telefonoError"></div>
+                    </div>
+                </div>
+
+                <div class="form-section">
+                    <div class="form-group">
+                        <label for="contraseña">Contraseña:</label>
+                        <div class="password-container">
+                            <input type="password" id="contraseña" name="contraseña" placeholder="Ingrese su contraseña" oninput="validatePassword()">
+                            <button type="button" onclick="togglePassword('contraseña')">👁</button>
+                        </div>
+                        <div class="error" id="contraseñaError"></div>
+                        <div class="password-info">
+                            <span id="mayus">* Una letra mayúscula</span><br>
+                            <span id="minus">* Una letra minúscula</span><br>
+                            <span id="numero">* Un número</span><br>
+                            <span id="especial">* Un carácter especial (¿,?,!,*)</span><br>
+                            <span id="longitud">* Mínimo 10 caracteres</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="confirmarContraseña">Confirmar Contraseña:</label>
+                        <div class="password-container">
+                            <input type="password" id="confirmarContraseña" placeholder="Confirme su contraseña" oninput="validateConfirmPassword()">
+                            <button type="button" onclick="togglePassword('confirmarContraseña')">👁</button>
+                        </div>
+                        <div class="error" id="confirmarContraseñaError"></div>
+                    </div>
+                </div>
+
+                <div class="form-button">
+                    <button type="submit">Registrar alumno</button>
+                </div>
+
+                <div class="back-button">
+                    <a href="/index">Regresar a la Página Principal</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <p id="popupMessage"></p>
+            <button onclick="closePopup()">Cerrar</button>
+        </div>
+    </div>
+
+    <footer>
+        <span></span>
+    </footer>
+    <script src="../Static/scripts/script_n_alumno.js"></script>
+</body>
+</html>
