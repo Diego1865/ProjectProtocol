@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinodal - Gestión de Protocolos</title>
+    <link rel="stylesheet" href="../Static/styles/estilos_perfiles.css">
+</head>
+<body>
+    <header>
+        <span>ESCUELA SUPERIOR DE CÓMPUTO</span>
+        <a id="logout" href="/logout">Cerrar sesión</a>
+        <span>INSTITUTO POLITÉCNICO NACIONAL</span>
+    </header>
+
+    <div class="container">
+        <div class="box">
+            <div class="logos-title">
+                <div class="logo-left-wrapper">
+                    <img src="../Static/images/ESCOM.png" alt="Logo ESCOM" class="logo-left">
+                </div>
+                <h1>Sinodal</h1>
+                <img src="../Static/images/IPN.png" alt="Logo IPN" class="logo-right">
+            </div>
+
+            <div class="content-section">
+                <div class="info-box" id="info-box">
+                    <section id="protocolos-asignados" class="section hidden">
+                        <h2>Consultar Protocolos Asignados</h2>
+                        <p>Aquí se mostrarán los protocolos que tienes asignados para evaluación.</p>
+                        
+                    </section>
+
+                    <section id="registrar-evaluaciones" class="section hidden">
+                        <h2>Registrar Evaluaciones</h2>
+                        <form>
+                            <label for="protocolo-id">ID del Protocolo:</label>
+                            <input type="text" id="protocolo-id" placeholder="Ingrese el ID del protocolo" required>
+
+                            <label for="resultado">Resultado:</label>
+                            <select id="resultado" required>
+                                <option value="" disabled selected>Seleccione</option>
+                                <option value="aprobado">Aprobado</option>
+                                <option value="no-aprobado">No Aprobado</option>
+                            </select>
+
+                            <label for="observaciones">Observaciones (en caso de rechazo):</label>
+                            <textarea id="observaciones" rows="4" placeholder="Escriba sus observaciones"></textarea>
+
+                            <button type="submit">Registrar Evaluación</button>
+                        </form>
+                    </section>
+
+                    <section id="protocolos-previos" class="section hidden">
+                        <h2>Consultar Protocolos Relacionados</h2>
+                        <p>Aquí se podrán consultar protocolos previos relacionados con tu área de evaluación.</p>
+                    </section>
+                </div>
+            </div>
+        </div>
+
+        <aside class="menu">
+            <ul>
+                <li><button onclick="showSection('protocolos-asignados')">Consultar Protocolos Asignados</button></li>
+                <li><button onclick="showSection('registrar-evaluaciones')">Registrar Evaluaciones</button></li>
+                <li><button onclick="showSection('protocolos-previos')">Consultar Protocolos Relacionados</button></li>
+            </ul>
+            <p class="menu-welcome-text">Bienvenido {{nombre}}</p>
+        </aside>
+    </div>
+
+    <footer>
+        <span>Análisis y Diseño de Sistemas</span>
+    </footer>
+
+    <script>
+    function showSection(sectionId) {
+        // Ocultar todas las secciones
+        const sections = document.querySelectorAll('.section');
+        sections.forEach(section => {
+            section.classList.add('hidden');
+        });
+
+        // Mostrar la sección seleccionada
+        const selectedSection = document.getElementById(sectionId);
+        if (selectedSection) {
+            selectedSection.classList.remove('hidden');
+        }
+    }
+    </script>
+</body>
+</html>

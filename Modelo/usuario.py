@@ -39,3 +39,29 @@ class Usuario:
             return False
         finally:
             conn.close()
+
+    @staticmethod
+    def obtener_por_correo(correo):
+        conn = conectar_db()
+        cursor = conn.cursor()
+        try:
+            cursor.execute('SELECT id, correo, nombre, rol FROM usuario WHERE correo = ?', (correo,))
+            usuario = cursor.fetchone()
+            if usuario:
+                return Usuario(usuario[0], usuario[1], usuario[2], usuario[3])  # Ajusta si necesitas más atributos
+            return None
+        finally:
+            conn.close()
+
+    @staticmethod
+    def obtener_por_id(usuario_id):
+        conn = conectar_db()
+        cursor = conn.cursor()
+        try:
+            cursor.execute('SELECT id, correo, nombre, rol FROM usuario WHERE id = ?', (usuario_id,))
+            usuario = cursor.fetchone()
+            if usuario:
+                return Usuario(usuario[0], usuario[1], usuario[2], usuario[3])  # Ajusta si necesitas más atributos
+            return None
+        finally:
+            conn.close()

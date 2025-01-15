@@ -28,3 +28,4 @@ class Sinodal(Usuario):
             conn.commit()
 
         conn.close()
+    

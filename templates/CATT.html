@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CATT - Gestión de Protocolos</title>
+    <link rel="stylesheet" href="../Static/styles/estilos_perfiles.css">
+</head>
+<body>
+    <header>
+        <span>ESCUELA SUPERIOR DE CÓMPUTO</span>
+        <a id="logout" href="/logout">Cerrar sesión</a>
+        <span>INSTITUTO POLITÉCNICO NACIONAL</span>
+    </header>
+
+    <div class="container">
+
+        <div class="box">
+            <div class="logos-title">
+                <div class="logo-left-wrapper">
+                    <img src="../Static/images/ESCOM.png" alt="Logo ESCOM" class="logo-left">
+                </div>
+                <h1>Coordinador Académico</h1>
+                <img src="../Static/images/IPN.png" alt="Logo IPN" class="logo-right">
+            </div>
+
+            <div class="content-section">
+                <div class="info-box" id="info-box">
+                   
+                    <section id="validar-protocolos" class="section hidden">
+                        <h2>Validar Protocolos Registrados</h2>
+                        <p>Aquí se mostrarán los protocolos registrados dentro del periodo establecido para validación.</p>
+                       
+                    </section>
+
+                    <section id="monitorear-proceso" class="section hidden">
+                        <h2>Monitorear Estado Global del Proceso</h2>
+                        <p>Aquí se mostrará una visión general del estado global del proceso de evaluación.</p>
+                
+                    </section>
+
+                    <section id="gestionar-normativa" class="section hidden">
+                        <h2>Gestionar Normativa</h2>
+                        <p>Aquí podrás gestionar los plazos y procedimientos relacionados con los protocolos.</p>
+                        <form>
+                            <label for="plazos">Definir nuevos plazos:</label>
+                            <input type="date" id="plazos" required>
+
+                            <label for="procedimientos">Procedimientos:</label>
+                            <textarea id="procedimientos" rows="4" placeholder="Describa los procedimientos"></textarea>
+
+                            <button type="submit">Guardar Cambios</button>
+                        </form>
+                    </section>
+
+                    <section id="agregar-personal" class="section hidden">
+                        <h2>Agregar Personal</h2>
+                        <form id="agregar-personal-form">
+                            <div class="form-section">
+                                <div class="form-group">
+                                    <label for="matricula-personal">Matrícula:</label>
+                                    <input type="text" id="matricula-personal" placeholder="Ingrese la matrícula" maxlength="10" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nombre-personal">Nombre:</label>
+                                    <input type="text" id="nombre-personal" placeholder="Ingrese el nombre completo" maxlength="50" required>
+                                </div>
+                            </div>
+                    
+                            <div class="form-section">
+                                <div class="form-group">
+                                    <label for="apellido-paterno-personal">Apellido Paterno:</label>
+                                    <input type="text" id="apellido-paterno-personal" placeholder="Ingrese el apellido paterno" maxlength="25" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="apellido-materno-personal">Apellido Materno:</label>
+                                    <input type="text" id="apellido-materno-personal" placeholder="Ingrese el apellido materno" maxlength="25" required>
+                                </div>
+                            </div>
+                    
+                            <div class="form-section">
+                                <div class="form-group">
+                                    <label for="correo-personal">Correo Institucional:</label>
+                                    <input type="email" id="correo-personal" placeholder="Ingrese el correo institucional" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="rol-personal">Rol:</label>
+                                    <select id="rol-personal" required>
+                                        <option value="" disabled selected>Seleccione el rol</option>
+                                        <option value="Sinodal">Sinodal</option>
+                                        <option value="coordinador">Coordinador Académico</option>
+                                    </select>
+                                </div>
+                            </div>
+                    
+                            <div class="form-button">
+                                <button type="submit">Registrar Personal</button>
+                            </div>
+                        </form>
+                    </section>
+                    
+                                      
+
+                </div>
+            </div>
+        </div>
+
+        <aside class="menu">
+            <ul>
+                <li><button onclick="showSection('validar-protocolos')">Validar Protocolos Registrados</button></li>
+                <li><button onclick="showSection('monitorear-proceso')">Monitorear Proceso Global</button></li>
+                <li><button onclick="showSection('agregar-personal')">Agregar Personal</button></li>
+                <li><button onclick="showSection('gestionar-normativa')">Gestionar Normativa</button></li>
+            </ul>
+            <p class="menu-welcome-text">Bienvenido {{nombre}}</p>
+        </aside>
+    </div>
+
+    <div id="popup" class="popup">
+        <div class="popup-content">
+            <p id="popupMessage"></p>
+            <button onclick="closePopup()">Cerrar</button>
+        </div>
+    </div>
+
+    <footer>
+        <span>Análsis y Diseño de Sistemas</span>
+    </footer>
+
+    <script src="../Static/scripts/script_catt.js"></script>
+</body>
+</html>
