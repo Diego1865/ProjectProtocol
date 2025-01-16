@@ -85,6 +85,93 @@ header, footer {
     display: none;
 }
 
+#validar-protocolos {
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 800px; /* Ancho máximo de la sección */
+}
+
+#validar-protocolos h2 {
+    text-align: center;
+    font-size: 24px;
+    color: #5e0e17;
+    margin-bottom: 20px;
+}
+
+#protocolos-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+#protocolos-table th, #protocolos-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+#protocolos-table th {
+    background-color: #5e0e17;
+    color: white;
+    font-size: 16px;
+}
+
+#protocolos-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+#protocolos-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+#validar-protocolo-form,
+#rechazar-protocolo-form {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+#validar-protocolo-form label,
+#rechazar-protocolo-form label {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+#validar-protocolo-form input,
+#rechazar-protocolo-form textarea,
+#validar-protocolo-form select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+#validar-protocolo-form button,
+#rechazar-protocolo-form button {
+    background-color: #5e0e17;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 14px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#validar-protocolo-form button:hover,
+#rechazar-protocolo-form button:hover {
+    background-color: #8b1c2d;
+}
+
 .mensaje.success {
     background-color: #d4edda;
     color: #155724;

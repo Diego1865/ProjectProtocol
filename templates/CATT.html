@@ -29,9 +29,42 @@
                    
                     <section id="validar-protocolos" class="section hidden">
                         <h2>Validar Protocolos Registrados</h2>
-                        <p>Aquí se mostrarán los protocolos registrados dentro del periodo establecido para validación.</p>
-                       
-                    </section>
+                        <table id="protocolos-table">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Título</th>
+                                    <th>Alumno ID</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody></tbody>
+                        </table>
+                    
+                        <!-- Formulario para validar -->
+                        <form id="validar-protocolo-form" style="margin-top: 20px; display: none;">
+                            <input type="hidden" id="protocolo-id" />
+                            <label for="nuevo-titulo">Nuevo Título:</label>
+                            <input type="text" id="nuevo-titulo" required />
+                            <label for="academia">Academia:</label>
+                            <select id="academia" required>
+                                <option value="" disabled selected>Selecciona una Academia</option>
+                                <option value="Ciencias básicas">Ciencias básicas</option>
+                                <option value="Ing. de Software">Ing. de Software</option>
+                                <option value="Ciencias Sociales">Ciencias Sociales</option>
+                                <option value="Electrónica">Electrónica</option>
+                            </select>
+                            <button type="submit" data-action="Validar">Validar Protocolo</button>
+                        </form>
+                    
+                        <!-- Formulario para rechazar -->
+                        <form id="rechazar-protocolo-form" style="margin-top: 20px; display: none;">
+                            <input type="hidden" id="rechazar-protocolo-id" />
+                            <label for="razon-rechazo">Razón de Rechazo:</label>
+                            <textarea id="razon-rechazo" required></textarea>
+                            <button type="submit" data-action="Rechazar">Rechazar Protocolo</button>
+                        </form>
+                    </section>                 
 
                     <section id="monitorear-proceso" class="section hidden">
                         <h2>Monitorear Estado Global del Proceso</h2>

@@ -13,6 +13,105 @@ function showSection(sectionId) {
     }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    fetch('/validar_protocolos', { method: 'GET' })
+        .then(response => response.json())
+        .then(protocolos => {
+            const tableBody = document.querySelector('#protocolos-table tbody');
+            tableBody.innerHTML = '';
+            protocolos.forEach(protocolo => {
+                const [id, titulo, estado, alumnoId, archivo] = protocolo;
+            
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${id}</td>
+                    <td><a href="${archivo}" target="_blank">${titulo}</a></td>
+                    <td>${alumnoId}</td>
+                    <td>
+                        <button onclick="populateForm(${id}, '${titulo}', 'validar')">Validar</button>
+                        <button onclick="populateForm(${id}, '${titulo}', 'rechazar')">Rechazar</button>
+                    </td>
+                `;
+                tableBody.appendChild(row);
+            });
+        });
+
+    document.querySelector('#validar-protocolo-form').addEventListener('submit', event => {
+        event.preventDefault();
+        sendProtocolUpdate('Validar');
+    });
+
+    document.querySelector('#rechazar-protocolo-form').addEventListener('submit', event => {
+        event.preventDefault();
+        sendProtocolUpdate('Rechazar');
+    });
+});
+
+function clearForms() {
+    document.querySelector('#validar-protocolo-form').reset();
+    document.querySelector('#rechazar-protocolo-form').reset();
+}
+
+function populateForm(id, titulo, action) {
+    const validarForm = document.querySelector('#validar-protocolo-form');
+    const rechazarForm = document.querySelector('#rechazar-protocolo-form');
+
+    clearForms();
+
+    if (action === 'validar') {
+        // Mostrar formulario de validar y ocultar el de rechazar
+        validarForm.style.display = 'block';
+        rechazarForm.style.display = 'none';
+
+        // Llenar campos del formulario de validar
+        document.querySelector('#protocolo-id').value = id;
+        document.querySelector('#nuevo-titulo').value = `${titulo} - 2019-B`;
+    } else if (action === 'rechazar') {
+        // Mostrar formulario de rechazar y ocultar el de validar
+        rechazarForm.style.display = 'block';
+        validarForm.style.display = 'none';
+
+        // Llenar campos del formulario de rechazar
+        document.querySelector('#rechazar-protocolo-id').value = id;
+    }
+}
+
+function sendProtocolUpdate(action) {
+    const protocoloId = action === 'Validar'
+        ? document.querySelector('#protocolo-id').value
+        : document.querySelector('#rechazar-protocolo-id').value;
+
+    const data = {
+        protocolo_id: protocoloId,
+        accion: action,
+    };
+
+    if (action === 'Rechazar') {
+        data.razon_rechazo = document.querySelector('#razon-rechazo').value;
+    }
+
+    console.log("Datos enviados al servidor:", data); // Para depuración
+
+    fetch('/validar_protocolos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                const accion = action === 'Validar' ? 'validado' : 'rechazado';
+                alert(`Protocolo ${accion} correctamente`);
+                location.reload();
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => console.error('Error en la solicitud:', error));
+}
+
+
+
 // Generar contraseña personalizada
 function generatePassword(nombre, apellidoPaterno, apellidoMaterno, matricula) {
     const nombrePart = nombre.charAt(0).toUpperCase() + nombre.charAt(1).toLowerCase() + nombre.charAt(2).toLowerCase();
@@ -42,47 +141,6 @@ function closePopup() {
     popup.style.display = 'none'; // Ocultar el popup
 }
 
-// Enviar correo de bienvenida
-function sendEmail(data) {
-    const emailDetails = {
-        to: data.correo,
-        subject: "Asignación de Personal",
-        html: `
-            <div style="font-family: Arial, sans-serif; color: #333;">
-                <h1>¡Bienvenido!</h1>
-                <p>Hola <strong>${data.nombre} ${data.apellidoPaterno} ${data.apellidoMaterno}</strong>,</p>
-                <p>Te damos la bienvenida al sistema. Se te ha asignado el rol de <strong>${data.rol}</strong>.</p>
-                <p>A continuación, te compartimos tus credenciales de acceso:</p>
-                <ul>
-                    <li><strong>Matrícula:</strong> ${data.matricula}</li>
-                    <li><strong>Contraseña:</strong> ${data.contraseña}</li>
-                </ul>
-                <p>Por favor, no compartas esta información con nadie.</p>
-                <p>¡Gracias por unirte al equipo!</p>
-            </div>
-        `,
-    };
-
-    fetch('http://localhost:3000/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(emailDetails),
-    })
-        .then(response => {
-            if (response.ok) {
-                showPopup(`Personal agregado. Correo enviado correctamente a ${data.correo}.`);
-            } else {
-                response.text().then(err => {
-                    console.error('Error del servidor:', err);
-                    showPopup("Hubo un error al enviar el correo.", true);
-                });
-            }
-        })
-        .catch(error => {
-            console.error('Error en la conexión al servidor:', error);
-            showPopup("Error de conexión con el servidor.", true);
-        });
-}
 
 // Validar el formulario de Agregar Personal
 document.getElementById('agregar-personal-form').addEventListener('submit', function(event) {

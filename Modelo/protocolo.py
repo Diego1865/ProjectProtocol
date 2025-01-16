@@ -8,13 +8,3 @@ class Protocolo:
         self.archivo = archivo
         self.estado = estado
 
-    @staticmethod
-    def obtener_por_id(protocolo_id):
-        conn = conectar_db()
-        cursor = conn.cursor()
-        cursor.execute('SELECT * FROM protocolo WHERE id = ?', (protocolo_id))
-        resultado = cursor.fetchone()
-        conn.close()
-        if resultado:
-            return Protocolo(*resultado)
-        return None

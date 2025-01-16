@@ -27,7 +27,7 @@ def crear_tablas():
             CREATE TABLE IF NOT EXISTS "protocolo" (
                 "id"	INTEGER,
                 "titulo"	TEXT NOT NULL,
-                "estado"	TEXT NOT NULL default 'pendiente',
+                "estado"	TEXT NOT NULL default 'En revisión',
                 "sinodal"	TEXT,
                 "fecha"	TEXT NOT NULL default CURRENT_TIMESTAMP,
                 "archivo"	TEXT NOT NULL,
@@ -38,6 +38,20 @@ def crear_tablas():
             );
         ''')
     conn.commit()
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS "historial_rechazos" (
+            "id" INTEGER PRIMARY KEY AUTOINCREMENT,
+            "protocolo_id" INTEGER NOT NULL,
+            "razon" TEXT NOT NULL,
+            FOREIGN KEY("protocolo_id") REFERENCES "protocolo"("id")
+        );
+    ''')
+    cursor = conn.cursor()
+    conn.commit()
+    
+    conn.close()
+    print("Rutas actualizadas con éxito.")
+    
     conn.close()
 
 if __name__ == "__main__":
